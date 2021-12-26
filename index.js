@@ -17,8 +17,9 @@ const authRoutes = require('./routes/auth')
 const Handlebars = require('handlebars')
 const varMiddleware = require('./middleware/variables')
 const userMiddleware = require('./middleware/user')
+const keys = require('./keys')
 
-const MONGODB_URI = `mongodb+srv://akylbek:101191@cluster0.asi1a.mongodb.net/shop`
+
 
 
 const app = express()
@@ -30,7 +31,7 @@ const hbs = exphbs.create({
 
 const store = new MongoStore({
   collection: 'sessions',
-  uri: MONGODB_URI
+  uri: keys.MONGODB_URI
 
 })
 
@@ -43,7 +44,7 @@ app.set('views', 'views')
 app.use(express.static(path.join(__dirname, 'public')))
 app.use(express.urlencoded({extended:true}))
 app.use(session({
-  secret: 'some secret value',
+  secret: keys.SESSION_SECRET,
   resave:false,
   saveUninitialized:false,
   store
@@ -69,7 +70,7 @@ const PORT = process.env.PORT || 3000
 
 async function start(){
     try {
-    await mongoose.connect(MONGODB_URI, {useNewUrlParser: true})
+    await mongoose.connect(keys.MONGODB_URI, {useNewUrlParser: true})
 
 
     app.listen(PORT, () => {
