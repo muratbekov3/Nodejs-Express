@@ -15,6 +15,7 @@ const authRoutes = require('./routes/auth')
 const Handlebars = require('handlebars')
 const User = require('./modules/user')
 const varMiddleware = require('./middleware/variables')
+const userMiddleware = require('./middleware/user')
 
 const MONGODB_URI = `mongodb+srv://akylbek:101191@cluster0.asi1a.mongodb.net/shop`
 
@@ -49,6 +50,7 @@ app.use(session({
 }))
 
 app.use(varMiddleware)
+app.use(userMiddleware)
 
 
 
