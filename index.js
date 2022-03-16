@@ -18,6 +18,7 @@ const Handlebars = require('handlebars')
 const varMiddleware = require('./middleware/variables')
 const userMiddleware = require('./middleware/user')
 const keys = require('./keys')
+require('dotenv').config()
 
 
 
@@ -26,6 +27,7 @@ const app = express()
 const hbs = exphbs.create({
     defaultLayout: 'main', 
     extname: 'hbs',
+    helpers: require('./utill/hbs.helpers'),
     handlebars: allowInsecurePrototypeAccess(Handlebars)
   });
 

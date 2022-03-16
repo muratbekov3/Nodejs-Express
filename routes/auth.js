@@ -8,10 +8,11 @@ const keys = require('../keys')
 const reqEmail = require('../emails/registration')
 const resetEmail = require('../emails/reset')
 const router = Router()
+require('dotenv').config()
 
 
 const transporter = nodemailer.createTransport(sendgrid({
-    auth: {api_key: keys.SENDGRID_API_KEY}
+    auth: {api_key:process.env.SENDGRID_API_KEY}
 }))
 
 router.get('/login', async (req, res) => {
