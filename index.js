@@ -3,6 +3,8 @@ const path = require('path')
 const csrf = require('csurf')
 const flash = require('connect-flash')
 const mongoose = require('mongoose')
+const helmet = require('helmet')
+const compression = require('compression')
 const exphbs = require('express-handlebars')
 const session = require('express-session')
 const MongoStore = require('connect-mongodb-session')(session)
@@ -45,7 +47,7 @@ app.set('view engine', 'hbs')
 app.set('views', 'views')
 
 
-
+app.use(compression())
 app.use(express.static(path.join(__dirname, 'public')))
 app.use('/images',express.static(path.join(__dirname, 'images')))
 app.use(express.urlencoded({extended:true}))
